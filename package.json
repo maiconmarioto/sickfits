@@ -1,0 +1,23 @@
+{
+  "name": "sick-fits",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"cd frontend && npm run dev\" \"cd backend && npm run dev\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maiconmarioto/sickfits.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maiconmarioto/sickfits/issues"
+  },
+  "homepage": "https://github.com/maiconmarioto/sickfits#readme",
+  "devDependencies": {
+    "concurrently": "^4.0.1"
+  }
+}
