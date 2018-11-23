@@ -7,6 +7,13 @@ enum Permission {
   PERMISSIONUPDATE
 }
 
+type CartItem {
+  id: ID! @unique
+  quantity: Int! @default(value: 1)
+  item: Item
+  user: User!
+}
+
 type User {
   id: ID! @unique
   name: String!
@@ -15,6 +22,7 @@ type User {
   resetToken: String
   resetTokenExpiry: Float
   permissions: [Permission]
+  cart: [CartItem!]!
 }
 
 type Item {
@@ -26,5 +34,5 @@ type Item {
   price: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
-  # user: User!
+  user: User!
 }

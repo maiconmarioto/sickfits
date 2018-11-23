@@ -3,6 +3,7 @@ import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import Form from "./styles/Form";
 import Error from "./ErrorMessage";
+import { CURRENT_USER_QUERY } from "./User";
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -30,59 +31,34 @@ class Signup extends Component {
   };
 
   render() {
-    return (
-      <Mutation mutation={SIGNUP_MUTATION} variables={this.state}>
+    return <Mutation mutation={SIGNUP_MUTATION} variables={this.state} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
         {(signup, { error, loading }) => {
-          return (
-            <Form
-              method="post"
-              onSubmit={async e => {
+          return <Form method="post" onSubmit={async e => {
                 e.preventDefault();
                 const res = await signup();
                 console.log(res);
                 this.setState({ name: "", email: "", password: "" });
-              }}
-            >
+              }}>
               <fieldset disabled={loading} aria-busy={loading}>
                 <h2>Signup for an account</h2>
                 <Error error={error} />
                 <label htmlFor="email">
                   Email
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="email"
-                    value={this.state.email}
-                    onChange={this.saveToState}
-                  />
+                  <input type="email" name="email" placeholder="email" value={this.state.email} onChange={this.saveToState} />
                 </label>
                 <label htmlFor="name">
                   Name
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="name"
-                    value={this.state.name}
-                    onChange={this.saveToState}
-                  />
+                  <input type="text" name="name" placeholder="name" value={this.state.name} onChange={this.saveToState} />
                 </label>
                 <label htmlFor="password">
                   Password
-                  <input
-                    type="password"
-                    name="password"
-                    placeholder="password"
-                    value={this.state.password}
-                    onChange={this.saveToState}
-                  />
+                  <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.saveToState} />
                 </label>
                 <button type="submit">Sign Up!</button>
               </fieldset>
-            </Form>
-          );
+            </Form>;
         }}
-      </Mutation>
-    );
+      </Mutation>;
   }
 }
 
